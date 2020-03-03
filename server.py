@@ -20,9 +20,9 @@
 # remember to:
 #     pip install flask
 
-
-# https://blog.miguelgrinberg.com/post/customizing-the-flask-response-class
-# https://hackersandslackers.com/flask-routes/
+# References:
+# https://blog.miguelgrinberg.com/post/customizing-the-flask-response-class Accessed on 2020-03-02
+# https://hackersandslackers.com/flask-routes/ Accessed on 2020-03-02
 
 
 import flask
