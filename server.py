@@ -21,6 +21,10 @@
 #     pip install flask
 
 
+# https://blog.miguelgrinberg.com/post/customizing-the-flask-response-class
+# https://hackersandslackers.com/flask-routes/
+
+
 import flask
 from flask import Flask, request, redirect
 import json
@@ -81,39 +85,27 @@ def update(entity):
     '''update the entities via this interface'''
     content = flask_post_json()
     myWorld.set(entity, content)
-    response = app.response_class(
-        response=json.dumps(content),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
+    getBack = app.response_class(response=json.dumps(content), status=200, mimetype='application/json')
+    return getBack
 
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
     '''you should probably return the world here'''
-    response = app.response_class(
-        response=json.dumps(myWorld.world()),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
+    getBack = app.response_class(response=json.dumps(myWorld.world()),status=200,mimetype='application/json')
+    return getBack
 
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
-    response = app.response_class(
-        response=json.dumps(myWorld.get(entity)),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
+    getBack = app.response_class(response=json.dumps(myWorld.get(entity)),status=200,mimetype='application/json')
+    return getBack
 
 @app.route("/clear", methods=['POST','GET'])
 def clear():
     '''Clear the world out!'''
     myWorld.clear()
-    return 'cleared'
+    return 'World has been cleared'
 
 if __name__ == "__main__":
     app.run()
