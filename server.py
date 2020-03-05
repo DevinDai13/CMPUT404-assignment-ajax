@@ -23,6 +23,7 @@
 # References:
 # https://blog.miguelgrinberg.com/post/customizing-the-flask-response-class Accessed on 2020-03-02
 # https://hackersandslackers.com/flask-routes/ Accessed on 2020-03-02
+# https://stackoverflow.com/questions/13081532/return-json-response-from-flask-view answered by scls on Nov 16 '14 at 20:16. edited by davidism Jan 26 '17 at 16:51 . Accessed on 2020-03-02
 
 
 import flask
@@ -83,23 +84,21 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    content = flask_post_json()
-    myWorld.set(entity, content)
-    getBack = app.response_class(response=json.dumps(content), status=200, mimetype='application/json')
-    return getBack
+    myWorld.set(entity, flask_post_json())
+    return app.response_class(response=json.dumps(flask_post_json()), status=200, mimetype='application/json')
 
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
     '''you should probably return the world here'''
-    getBack = app.response_class(response=json.dumps(myWorld.world()),status=200,mimetype='application/json')
-    return getBack
+    return app.response_class(response=json.dumps(myWorld.world()),status=200,mimetype='application/json')
+
 
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
-    getBack = app.response_class(response=json.dumps(myWorld.get(entity)),status=200,mimetype='application/json')
-    return getBack
+    return app.response_class(response=json.dumps(myWorld.get(entity)),status=200,mimetype='application/json')
+
 
 @app.route("/clear", methods=['POST','GET'])
 def clear():
