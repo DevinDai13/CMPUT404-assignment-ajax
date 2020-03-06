@@ -91,13 +91,13 @@ def update(entity):
 @app.route("/world", methods=['POST','GET'])    
 def world():
     '''you should probably return the world here'''
-    return app.response_class(response=json.dumps(myWorld.world()),status=200,mimetype='application/json')
+    return app.response_class(response=json.dumps(myWorld.world()), status=200, mimetype='application/json')
 
 
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
-    return app.response_class(response=json.dumps(myWorld.get(entity)),status=200,mimetype='application/json')
+    return app.response_class(response=json.dumps(myWorld.get(entity)), status=200, mimetype='application/json')
 
 
 @app.route("/clear", methods=['POST','GET'])
